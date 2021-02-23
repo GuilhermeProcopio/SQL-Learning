@@ -1,0 +1,134 @@
+CREATE DATABASE Logistica
+ON 
+( NAME = Logistica_DAT,
+	FILENAME = 'E:\BDlogistica\Logistica_dados.mdf',
+	SIZE  = 10,
+	MAXSIZE = 50, 
+	FILEGROWTH = 5 )
+LOG ON
+(NAME = Logistica_LOG,
+	FILENAME = 'E:\BDlogistica\Logistica_log.ldf',
+	SIZE = 5MB,
+	MAXSIZE = 25MB,
+	FILEGROWTH = 5MB );
+GO
+
+CREATE TABLE TableClientes 
+(
+
+CodigoDoCliente Char(10) Primary Key NOT NULL,
+NomeDaEmpresa varchar(70) NOT NULL,
+NomeDoContato	varchar(70) NULL,
+CargoDoContato	varchar(70) NULL,
+Endereco	varchar(50) NULL,
+Cidade varchar(25) NULL, 
+Regiao varchar(25) NULL,
+CEP char (15) NULL,
+Pais varchar (25) NULL,
+Telefone char(20) NULL,
+Fax char(20) NULL
+
+)
+
+CREATE TABLE TableTransportadora 
+(
+
+CodigoDaTransportadora int NOT NULL,
+NomeDaEmpresa varchar(30) NOT NULL,
+Telefone char(20) NULL,
+
+)
+
+CREATE TABLE TableCategorias
+(
+
+CodigoDaCategoria int NOT NULL,
+NomeDaCategoria varchar(30)	NOT NULL,
+Descricao varchar(100) NULL,
+
+)
+
+CREATE TABLE TableDetalhesDoPedido
+(
+
+NumeroDoPedido int NOT NULL,
+CodigoDoPedido int PRIMARY KEY NOT NULL,
+PrecoUnitario money NULL,
+Quantidade int NULL,
+Desconto Float NULL
+
+)
+
+CREATE TABLE TableFornecedores 
+(
+
+CodigoDoFornecedor int NOT NULL,
+NomeDaEmpresa varchar(30) NOT NULL,
+NomeDoContato	varchar(70) NOT NULL,
+CargoDoContato varchar(40)  NULL,
+Endereco varchar(50) NULL,
+Cidade varchar (25) NULL,
+Regiao varchar(25) NULL,
+CEP char(15) NULL,
+Pais varchar(25) NULL,
+Telefone char(20) NULL,
+Fax char(20) NULL,
+
+)
+
+CREATE TABLE TableFuncionarios
+(
+
+CodigoDoFunCionario int Primary Key NOT NULL,
+Sobrenome varchar(30) NULL,
+Nome Varchar(30) NULL,
+Cargo Varchar(30) NULL,
+Tratamento char (30) NULL,
+DataDeNascimento Date NOT NULL,
+DataDeContratacao Date NULL,
+Endereco varchar(50) NULL,
+Cidade varchar (25) NULL,
+Regiao varchar(25) NULL,
+CEP char(15) NULL,
+Pais varchar(25) NULL,
+TelefoneResidencial char(20) NULL,
+Ramal char (5) NULL,
+Observacoes varchar (200) NULL
+
+)
+
+CREATE TABLE TablePedidos
+(
+
+NumeroDoPedido int NOT NULL,
+CodigoDoCliente	char(10) NOT NULL,
+CodigoDoFuncionario int NOT NULL,
+DataDoPedido Date NULL,
+DataDeEntrega Date NULL,
+DataDeEnvio Date NULL,
+CodigoDeTransportadora int NOT NULL,
+Frete money NULL,
+NomeDoDestinatario varchar (50) NULL,
+EnderecoDoDestinatario varchar(50) NULL,
+CEPdeDestino char(15) NULL,
+PaisDeDestino varchar(25) NULL,
+CidadedeDestino varchar(25) NULL,
+RegiaoDeDestino varchar(25) NULL,
+
+)
+
+CREATE TABLE TableProdutos
+(
+
+CodigoDoProduto int PRIMARY KEY NOT NULL,
+NomeDoProduto varchar(50) NOT NULL,
+CodigoDoFornecedor int NOT NULL,
+CodigoDaCategoria int NOT NULL,
+QuantidadePorUnidade char (30) NULL,
+PrecoUnitario money NULL,
+UnidadesEmEstoque int NULL,
+UnidadesPedidas int NULL,
+NivelDeReposicao int NULL,
+Descontinuado int NULL
+
+)
